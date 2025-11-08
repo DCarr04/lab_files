@@ -308,11 +308,11 @@ void *producer (void *parg)
      */
     pthread_mutex_lock(fifo->mutex); //enter crit sect
     if (*total_inserted >= WORK_MAX) {
-      //pthread_mutex_unlock(fifo->mutex);
+      pthread_mutex_unlock(fifo->mutex);
       sem_post(fifo->slotsToGet);
       break;
     }
-    pthread_mutex_unlock(fifo->mutex);
+    //pthread_mutex_unlock(fifo->mutex);
 
     /*
      * OK, so we produce an item. Increment the counter of total
@@ -320,7 +320,7 @@ void *producer (void *parg)
      * queue. We are accessing the shared queue fifo in this section.
      * So, we should ensure mutual exclusion.
      */
-    pthread_mutex_lock(fifo->mutex);
+    //pthread_mutex_lock(fifo->mutex);
     item = (*total_inserted);
     queueAdd (fifo, item);
     ++(*total_inserted);
@@ -375,12 +375,12 @@ void *consumer (void *carg)
      */
     pthread_mutex_lock(fifo->mutex);
     if (*total_consumed >= WORK_MAX) {
-      //pthread_mutex_unlock(fifo->mutex); //XX
+      pthread_mutex_unlock(fifo->mutex); //XX
       sem_post(fifo->slotsToPut);
       //sem_post(fifo->slotsToGet);
       break;
     }
-    pthread_mutex_unlock(fifo->mutex);
+    //pthread_mutex_unlock(fifo->mutex);
 
     /*
      * Remove the next item from the queue. Increment the count of the
@@ -389,7 +389,7 @@ void *consumer (void *carg)
      * others are busy consuming them. We are accessing the shared queue 
      * fifo in this section. So, we should ensure mutual exclusion.
      */
-    pthread_mutex_lock(fifo->mutex); //XX
+    //pthread_mutex_lock(fifo->mutex); //XX
     queueRemove (fifo, &item);
     (*total_consumed)++;
     pthread_mutex_unlock(fifo->mutex);
