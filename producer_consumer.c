@@ -9,7 +9,7 @@
  * Define constants for how big the shared queue should be and how
  * much total work the producers and consumers should perform
  */
-#define QUEUESIZE 30
+#define QUEUESIZE 5
 #define WORK_MAX 30
 
 /*
@@ -24,7 +24,7 @@
 #define CONSUMER_CPU   25
 #define CONSUMER_BLOCK 10
 
-#define YOU_WILL_DETERMINE_FOR_PRODUCERS 5
+#define YOU_WILL_DETERMINE_FOR_PRODUCERS 30
 #define YOU_WILL_DETERMINE_FOR_CONSUMERS 0
 
 /*****************************************************
