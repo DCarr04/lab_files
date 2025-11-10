@@ -295,6 +295,9 @@ void *producer (void *parg)
      * produce, so wait until it is not full. Use sem_wait on the
      * appropriate semaphore from the fifo queue, for the producer.
      */
+    if(fifo->full == 1){
+      printf("prod %d:   FULL.\n", my_tid);
+    }
 
     //XX sem_wait
     sem_wait(fifo->slotsToPut); //producer
@@ -365,6 +368,9 @@ void *consumer (void *carg)
      */
     
     //XX sem_wait
+    if(fifo->empty == 1){
+      printf("con %d:   EMPTY.\n", my_tid);
+    }
     sem_wait(fifo->slotsToGet);
 	
 	/*
