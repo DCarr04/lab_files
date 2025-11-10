@@ -403,7 +403,7 @@ void *consumer (void *carg)
      */
     sem_post(fifo->slotsToGet);
     //do_work(CONSUMER_CPU,CONSUMER_CPU);
-    do_work(CONSUMER_CPU, CONSUMER_BLOCK);
+    do_work(CONSUMER_CPU, CONSUMER_CPU); //CONSUMER_BLOCK
     printf ("con %d:   %d.\n", my_tid, item);
 
   }
