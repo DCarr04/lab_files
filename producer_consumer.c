@@ -368,7 +368,7 @@ void *consumer (void *carg)
      */
     
     //XX sem_wait
-    if(fifo->empty == 1){
+    if(sem_getvalue == 0){
       printf("con %d:   EMPTY.\n", my_tid);
     }
     sem_wait(fifo->slotsToGet);
