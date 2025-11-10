@@ -309,13 +309,10 @@ void *producer (void *parg)
      * additional sem_post for the producers and consumers to free up ones
      * that are in the waiting queue for fifo->slotsToPut and fifo->slotsToGet respectively
      */
-    //pthread_mutex_lock(fifo->mutex); //enter crit sect
     if (*total_inserted >= WORK_MAX) {
-      //pthread_mutex_unlock(fifo->mutex);
       sem_post(fifo->slotsToGet);
       break;
     }
-    //pthread_mutex_unlock(fifo->mutex);
 
     /*
      * OK, so we produce an item. Increment the counter of total
@@ -379,11 +376,9 @@ void *consumer (void *carg)
      * producers and consumers to free up ones that are in the waiting 
      * queue for fifo->slotsToPut and fifo->slotsToGet respectively
      */
-    //pthread_mutex_lock(fifo->mutex);
     if (*total_consumed >= WORK_MAX) {
-      //pthread_mutex_unlock(fifo->mutex); //XX
-      sem_post(fifo->slotsToPut);
-      //sem_post(fifo->slotsToGet);
+      //sem_post(fifo->slotsToPut);
+      sem_post(fifo->slotsToGet);
       break;
     }
     //pthread_mutex_unlock(fifo->mutex);
