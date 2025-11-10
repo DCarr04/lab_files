@@ -381,7 +381,6 @@ void *consumer (void *carg)
       sem_post(fifo->slotsToGet);
       break;
     }
-    //pthread_mutex_unlock(fifo->mutex);
 
     /*
      * Remove the next item from the queue. Increment the count of the
@@ -402,9 +401,7 @@ void *consumer (void *carg)
 	 * Also, notify the producers that there is available space
 	 * in the buffer
      */
-    //sem_post(fifo->slotsToGet);
-    //do_work(CONSUMER_CPU,CONSUMER_CPU);
-    do_work(CONSUMER_CPU, CONSUMER_BLOCK); //CONSUMER_BLOCK
+    do_work(CONSUMER_CPU, CONSUMER_BLOCK);
     sem_post(fifo->slotsToGet);
     printf ("con %d:   %d.\n", my_tid, item);
 
