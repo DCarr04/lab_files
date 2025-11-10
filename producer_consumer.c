@@ -288,7 +288,7 @@ void *producer (void *parg)
      * it. Finally, at the end of the loop, outside the critical
      * section, announce that we produced it.
      */
-    do_work(PRODUCER_CPU, PRODUCER_BLOCK);
+    do_work(PRODUCER_CPU, PRODUCER_CPU); //BLOCK to CPU
 
     /*
      * If the queue is full, we have no place to put anything we
