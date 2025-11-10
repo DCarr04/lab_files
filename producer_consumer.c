@@ -24,8 +24,8 @@
 #define CONSUMER_CPU   25
 #define CONSUMER_BLOCK 10
 
-#define YOU_WILL_DETERMINE_FOR_PRODUCERS 678
-#define YOU_WILL_DETERMINE_FOR_CONSUMERS 678
+#define YOU_WILL_DETERMINE_FOR_PRODUCERS 5
+#define YOU_WILL_DETERMINE_FOR_CONSUMERS 0
 
 /*****************************************************
  *   Shared Queue Related Structures and Routines    *
@@ -78,10 +78,10 @@ queue *queueInit (void)
    * Allocate and initialize the slotsToPut and slotsToGet semaphores
    */
   q->slotsToPut = (sem_t *) malloc (sizeof (sem_t));
-  sem_init (q->slotsToPut, 0, QUEUESIZE); //YOU_WILL_DETERMINE_FOR_PRODUCERS
+  sem_init (q->slotsToPut, 0, YOU_WILL_DETERMINE_FOR_PRODUCERS); //YOU_WILL_DETERMINE_FOR_PRODUCERS
 
   q->slotsToGet = (sem_t *) malloc (sizeof (sem_t));
-  sem_init (q->slotsToGet, 0, 0); //FOR_CONSUMERS
+  sem_init (q->slotsToGet, 0, YOU_WILL_DETERMINE_FOR_CONSUMERS); //FOR_CONSUMERS
 
   return (q);
 }
