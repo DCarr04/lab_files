@@ -288,7 +288,7 @@ void *producer (void *parg)
      * it. Finally, at the end of the loop, outside the critical
      * section, announce that we produced it.
      */
-    do_work(PRODUCER_CPU, PRODUCER_CPU); //BLOCK to CPU
+    do_work(PRODUCER_CPU, PRODUCER_BLOCK); //BLOCK to CPU
 
     /*
      * If the queue is full, we have no place to put anything we
@@ -403,7 +403,7 @@ void *consumer (void *carg)
      */
     sem_post(fifo->slotsToGet);
     //do_work(CONSUMER_CPU,CONSUMER_CPU);
-    do_work(CONSUMER_CPU, CONSUMER_CPU); //CONSUMER_BLOCK
+    do_work(CONSUMER_CPU, CONSUMER_BLOCK); //CONSUMER_BLOCK
     printf ("con %d:   %d.\n", my_tid, item);
 
   }
