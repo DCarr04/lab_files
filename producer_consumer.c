@@ -377,7 +377,7 @@ void *consumer (void *carg)
      * queue for fifo->slotsToPut and fifo->slotsToGet respectively
      */
     if (*total_consumed >= WORK_MAX) {
-      //sem_post(fifo->slotsToPut);
+      sem_post(fifo->slotsToPut);
       sem_post(fifo->slotsToGet);
       break;
     }
