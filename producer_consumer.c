@@ -401,10 +401,10 @@ void *consumer (void *carg)
 	 * Also, notify the producers that there is available space
 	 * in the buffer
      */
-    sem_post(fifo->slotsToGet);
+    //sem_post(fifo->slotsToGet);
     //do_work(CONSUMER_CPU,CONSUMER_CPU);
     do_work(CONSUMER_CPU, CONSUMER_BLOCK); //CONSUMER_BLOCK
-    //sem_post(fifo->slotsToGet);
+    sem_post(fifo->slotsToGet);
     printf ("con %d:   %d.\n", my_tid, item);
 
   }
